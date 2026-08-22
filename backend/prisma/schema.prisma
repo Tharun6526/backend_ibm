@@ -1,0 +1,404 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum TaskStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum PriorityLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum InterviewType {
+  TECHNICAL
+  HR
+  BEHAVIORAL
+  DSA
+  JAVA
+  FULL_STACK
+}
+
+enum InterviewDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum ReadinessStatus {
+  NOT_READY
+  NEEDS_WORK
+  ALMOST_READY
+  JOB_READY
+}
+
+model User {
+  id                     String                 @id @default(uuid())
+  name                   String
+  email                  String                 @unique
+  password               String
+  createdAt              DateTime               @default(now())
+  updatedAt              DateTime               @updatedAt
+  
+  profile                Profile?
+  resumes                Resume[]
+  githubProfile          GithubProfile?
+  careerRecommendations  CareerRecommendation[]
+  userSkills             UserSkill[]
+  skillGaps              SkillGap[]
+  roadmaps               Roadmap[]
+  courseProgresses       CourseProgress[]
+  jobReadiness           JobReadiness?
+  interviews             Interview[]
+}
+
+model Profile {
+  id                     String           @id @default(uuid())
+  userId                 String           @unique
+  user                   User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  college                String?
+  degree                 String?
+  branch                 String?
+  graduationYear         Int?
+  careerGoal             String?
+  experienceLevel        ExperienceLevel  @default(BEGINNER)
+  hoursPerDay            Int              @default(2)
+  preferredLearningStyle String?
+  targetMonths           Int              @default(6)
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+}
+
+model Resume {
+  id           String                @id @default(uuid())
+  userId       String
+  user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fileName     String
+  fileUrl      String
+  fileType     String
+  extractedText String?              @db.Text
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  analysis     ResumeAnalysis?
+  skills       ResumeSkill[]
+  projects     ResumeProject[]
+  experiences  ResumeExperience[]
+  certifications ResumeCertification[]
+}
+
+model ResumeAnalysis {
+  id           String   @id @default(uuid())
+  resumeId     String   @unique
+  resume       Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  strengths    String[]
+  weaknesses   String[]
+  feedback     String[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ResumeSkill {
+  id        String   @id @default(uuid())
+  resumeId  String
+  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  name      String
+  level     Int      @default(50)
+  createdAt DateTime @default(now())
+
+  @@unique([resumeId, name])
+}
+
+model ResumeProject {
+  id          String   @id @default(uuid())
+  resumeId    String
+  resume      Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  title       String
+  description String?  @db.Text
+  technologies String[]
+  link        String?
+  createdAt   DateTime @default(now())
+}
+
+model ResumeExperience {
+  id          String    @id @default(uuid())
+  resumeId    String
+  resume      Resume    @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  role        String
+  company     String
+  duration    String?
+  description String?   @db.Text
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model ResumeCertification {
+  id         String   @id @default(uuid())
+  resumeId   String
+  resume     Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  name       String
+  issuer     String?
+  issueDate  DateTime?
+  createdAt  DateTime @default(now())
+}
+
+model GithubProfile {
+  id           String             @id @default(uuid())
+  userId       String             @unique
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  username     String
+  avatarUrl    String?
+  bio          String?
+  publicRepos  Int                @default(0)
+  followers    Int                @default(0)
+  following    Int                @default(0)
+  profileUrl   String?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  repositories GithubRepository[]
+  analysis     GithubAnalysis?
+}
+
+model GithubRepository {
+  id              String        @id @default(uuid())
+  githubProfileId String
+  githubProfile   GithubProfile @relation(fields: [githubProfileId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?       @db.Text
+  language        String?
+  stars           Int           @default(0)
+  forks           Int           @default(0)
+  url             String
+  createdAt       DateTime      @default(now())
+}
+
+model GithubAnalysis {
+  id              String        @id @default(uuid())
+  githubProfileId String        @unique
+  githubProfile   GithubProfile @relation(fields: [githubProfileId], references: [id], onDelete: Cascade)
+  projectQuality  Int           @default(70)
+  complexityScore Int           @default(70)
+  relevanceScore  Int           @default(70)
+  summary         String?       @db.Text
+  topLanguages    String[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model Career {
+  id             String                 @id @default(uuid())
+  title          String                 @unique
+  description    String                 @db.Text
+  requiredSkills String[]
+  demandLevel    String                 @default("High")
+  avgSalary      String?
+  createdAt      DateTime               @default(now())
+  
+  recommendations CareerRecommendation[]
+}
+
+model CareerRecommendation {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  careerId        String?
+  career          Career?  @relation(fields: [careerId], references: [id], onDelete: SetNull)
+  careerName      String
+  matchPercentage Int      @default(0)
+  reasons         String[]
+  requiredSkills  String[]
+  createdAt       DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Skill {
+  id          String      @id @default(uuid())
+  name        String      @unique
+  category    String?
+  description String?
+  userSkills  UserSkill[]
+  courses     Course[]
+}
+
+model UserSkill {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skillId   String?
+  skill     Skill?   @relation(fields: [skillId], references: [id], onDelete: SetNull)
+  skillName String
+  level     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, skillName])
+}
+
+model SkillGap {
+  id                 String        @id @default(uuid())
+  userId             String
+  user               User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill              String
+  currentLevel       Int           @default(0)
+  requiredLevel      Int           @default(100)
+  gap                Int           @default(100)
+  priority           PriorityLevel @default(MEDIUM)
+  recommendedActions String[]
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@index([userId])
+  @@unique([userId, skill])
+}
+
+model Roadmap {
+  id           String        @id @default(uuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title        String
+  targetCareer String
+  durationMonths Int         @default(6)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  tasks        RoadmapTask[]
+}
+
+model RoadmapTask {
+  id          String        @id @default(uuid())
+  roadmapId   String
+  roadmap     Roadmap       @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+  title       String
+  description String        @db.Text
+  skill       String
+  duration    String
+  priority    PriorityLevel @default(MEDIUM)
+  status      TaskStatus    @default(NOT_STARTED)
+  resources   String[]
+  orderIndex  Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([roadmapId])
+}
+
+model Course {
+  id          String           @id @default(uuid())
+  courseName  String
+  provider    String           @default("IBM SkillsBuild")
+  skillId     String?
+  skill       Skill?           @relation(fields: [skillId], references: [id], onDelete: SetNull)
+  skillName   String
+  difficulty  String           @default("Intermediate")
+  duration    String
+  description String           @db.Text
+  externalUrl String
+  createdAt   DateTime         @default(now())
+
+  progresses  CourseProgress[]
+}
+
+model CourseProgress {
+  id               String   @id @default(uuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId         String
+  course           Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  progress         Int      @default(0)
+  completionStatus Boolean  @default(false)
+  updatedAt        DateTime @updatedAt
+  createdAt        DateTime @default(now())
+
+  @@unique([userId, courseId])
+}
+
+model JobReadiness {
+  id              String          @id @default(uuid())
+  userId          String          @unique
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  overallScore    Int             @default(0)
+  technicalSkills Int             @default(0)
+  dsa             Int             @default(0)
+  projects        Int             @default(0)
+  resume          Int             @default(0)
+  github          Int             @default(0)
+  interview       Int             @default(0)
+  status          ReadinessStatus @default(NOT_READY)
+  improvements    String[]
+  updatedAt       DateTime        @updatedAt
+  createdAt       DateTime        @default(now())
+}
+
+model Interview {
+  id          String               @id @default(uuid())
+  userId      String
+  user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        InterviewType        @default(TECHNICAL)
+  difficulty  InterviewDifficulty  @default(MEDIUM)
+  status      String               @default("IN_PROGRESS")
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  questions   InterviewQuestion[]
+  answers     InterviewAnswer[]
+  evaluations InterviewEvaluation[]
+
+  @@index([userId])
+}
+
+model InterviewQuestion {
+  id          String            @id @default(uuid())
+  interviewId String
+  interview   Interview         @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  questionText String           @db.Text
+  category    String
+  orderIndex  Int               @default(0)
+  createdAt   DateTime          @default(now())
+
+  answers     InterviewAnswer[]
+}
+
+model InterviewAnswer {
+  id          String            @id @default(uuid())
+  interviewId String
+  interview   Interview         @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  questionId  String
+  question    InterviewQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  answerText  String            @db.Text
+  createdAt   DateTime          @default(now())
+
+  evaluation  InterviewEvaluation?
+}
+
+model InterviewEvaluation {
+  id             String          @id @default(uuid())
+  interviewId    String
+  interview      Interview       @relation(fields: [interviewId], references: [id], onDelete: Cascade)
+  answerId       String          @unique
+  answer         InterviewAnswer @relation(fields: [answerId], references: [id], onDelete: Cascade)
+  correctness    Int             @default(0)
+  communication  Int             @default(0)
+  technicalDepth Int             @default(0)
+  overallScore   Int             @default(0)
+  feedback       String          @db.Text
+  createdAt      DateTime        @default(now())
+}
