@@ -2,14 +2,22 @@ import prisma from '../config/database.js';
 import { aiService } from '../ai/aiService.js';
 import { calculateReadiness } from './readinessService.js';
 
-export const startInterview = async (userId, { type, difficulty }) => {
+export const startInterview = async (userId, { type, difficulty, role }) => {
   const interviewType = type || 'TECHNICAL';
   const interviewDiff = difficulty || 'MEDIUM';
+
+  // Fetch target career goal from user profile if role is not explicitly provided
+  let targetRole = role;
+  if (!targetRole) {
+    const profile = await prisma.profile.findUnique({ where: { userId } });
+    targetRole = profile?.careerGoal || 'Software Developer';
+  }
 
   const firstQ = await aiService.generateInterviewQuestion({
     type: interviewType,
     difficulty: interviewDiff,
-    questionNumber: 0
+    questionNumber: 0,
+    role: targetRole
   });
 
   const interview = await prisma.$transaction(async (tx) => {
@@ -85,10 +93,14 @@ export const submitAnswer = async (interviewId, userId, { questionId, answerText
   let nextQuestion = null;
 
   if (currentCount < 3) {
+    const profile = await prisma.profile.findUnique({ where: { userId } });
+    const targetRole = profile?.careerGoal || 'Software Developer';
+
     const qData = await aiService.generateInterviewQuestion({
       type: interview.type,
       difficulty: interview.difficulty,
-      questionNumber: currentCount
+      questionNumber: currentCount,
+      role: targetRole
     });
 
     const createdQ = await prisma.interviewQuestion.create({

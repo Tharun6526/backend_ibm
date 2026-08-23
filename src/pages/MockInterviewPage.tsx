@@ -169,7 +169,7 @@ export function MockInterviewPage() {
     setDone(false)
 
     try {
-      const res = await startInterviewApi(token, { type: 'TECHNICAL', difficulty: 'MEDIUM' })
+      const res = await startInterviewApi(token, { type: 'TECHNICAL', difficulty: 'MEDIUM', role: careerTarget })
       setInterviewId(res.interviewId)
       setCurrentQuestion(res.question)
 

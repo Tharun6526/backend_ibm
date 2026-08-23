@@ -1,66 +1,56 @@
-import axios from 'axios';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { env } from '../config/environment.js';
 
 export const recommendCareerAI = async ({ profile, resumeSkills, githubData, targetGoal }) => {
   const goal = targetGoal || profile?.careerGoal || 'Software Developer';
+  const apiKey = env.GEMINI_API_KEY || env.AI_API_KEY;
 
-  if (env.AI_API_KEY) {
+  if (apiKey) {
     try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
-        {
-          model: env.AI_MODEL || 'gpt-4o-mini',
-          messages: [
-            {
-              role: 'system',
-              content: `You are an AI Career Match Coach. Analyze candidate details and recommend career matches.
-Return ONLY valid JSON matching this format:
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({
+        model: 'gemini-1.5-flash',
+        generationConfig: { responseMimeType: 'application/json' }
+      });
+
+      const prompt = `You are an expert AI Career Coach. Analyze the candidate details and return recommended career matches.
+Candidate Target Goal: "${goal}"
+Profile Level: "${profile?.experienceLevel || 'BEGINNER'}"
+
+Return ONLY valid JSON format:
 {
   "recommendations": [
     {
-      "career": "Software Developer",
-      "matchPercentage": 91,
-      "reasons": ["Strong Java skills", "Good SQL knowledge", "Backend project experience"],
+      "career": "${goal}",
+      "matchPercentage": 92,
+      "reasons": ["Strong skill alignment", "High project relevance", "Active learning path"],
       "requiredSkills": ["DSA", "System Design", "Testing", "Spring Boot", "Git", "Cloud"]
     }
   ]
-}`
-            },
-            {
-              role: 'user',
-              content: JSON.stringify({ profile, resumeSkills, githubData, goal })
-            }
-          ],
-          response_format: { type: 'json_object' },
-          temperature: 0.3
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${env.AI_API_KEY}`,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+}`;
 
-      const parsed = JSON.parse(response.data.choices[0].message.content);
-      if (parsed.recommendations && Array.isArray(parsed.recommendations)) {
+      const result = await model.generateContent(prompt);
+      const text = result.response.text();
+      const parsed = JSON.parse(text);
+
+      if (parsed.recommendations && Array.isArray(parsed.recommendations) && parsed.recommendations.length > 0) {
         return parsed.recommendations;
       }
     } catch (err) {
-      console.warn('AI Career API failed, falling back to local analysis engine:', err.message);
+      console.warn('Gemini Career Recommendation API warning (using fallback):', err.message);
     }
   }
 
   // Fallback Career Match Engine
   const skillsList = (resumeSkills || []).map((s) => s.name || s);
-  const matchBase = Math.min(95, 75 + skillsList.length * 3);
+  const matchBase = Math.min(95, 78 + skillsList.length * 3);
 
   return [
     {
       career: goal === 'Not sure' ? 'Software Developer' : goal,
       matchPercentage: matchBase,
       reasons: [
-        `Strong alignment with your goal of ${goal}`,
+        `Strong alignment with your target goal of ${goal}`,
         skillsList.length > 0 ? `Demonstrated proficiency in ${skillsList.slice(0, 3).join(', ')}` : 'Solid computer science foundations',
         'Active GitHub technical project repository history'
       ],
@@ -68,10 +58,10 @@ Return ONLY valid JSON matching this format:
     },
     {
       career: 'Cloud Engineer',
-      matchPercentage: Math.max(50, matchBase - 15),
+      matchPercentage: Math.max(50, matchBase - 12),
       reasons: [
-        'Growing industry demand for cloud deployment',
-        'Complements backend engineering skills'
+        'Growing industry demand for cloud deployment & infrastructure',
+        'Complements backend engineering & microservices skills'
       ],
       requiredSkills: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'Linux']
     }

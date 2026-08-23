@@ -19,6 +19,8 @@ import roadmapRoutes from './routes/roadmapRoutes.js';
 import courseRoutes from './routes/courseRoutes.js';
 import readinessRoutes from './routes/readinessRoutes.js';
 import interviewRoutes from './routes/interviewRoutes.js';
+import copilotRoutes from './routes/copilotRoutes.js';
+import jobRoutes from './routes/jobRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,6 +75,8 @@ app.use('/api/roadmap', roadmapRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/readiness', readinessRoutes);
 app.use('/api/interviews', interviewRoutes);
+app.use('/api/copilot', copilotRoutes);
+app.use('/api/jobs', jobRoutes);
 
 // Error Handling Middlewares
 app.use(notFound);

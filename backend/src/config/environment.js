@@ -14,7 +14,8 @@ export const env = {
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
   GITHUB_TOKEN: process.env.GITHUB_TOKEN || '',
   AI_API_KEY: process.env.AI_API_KEY || '',
-  AI_MODEL: process.env.AI_MODEL || 'gpt-4o-mini',
+  GEMINI_API_KEY: process.env.GEMINI_API_KEY || process.env.AI_API_KEY || '',
+  AI_MODEL: process.env.AI_MODEL || 'gemini-1.5-flash',
   CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:5173',
   NODE_ENV: process.env.NODE_ENV || 'development'
 };

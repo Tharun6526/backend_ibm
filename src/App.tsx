@@ -21,14 +21,7 @@ import { RoadmapPage }               from './pages/RoadmapPage'
 import { CoursesPage }               from './pages/CoursesPage'
 import { JobReadinessPage }          from './pages/JobReadinessPage'
 import { MockInterviewPage }         from './pages/MockInterviewPage'
-
-function PlaceholderPage({ title }: { title: string }) {
-  return (
-    <div className="flex items-center justify-center h-full min-h-64 text-surface-400">
-      <p className="text-sm">{title} — coming soon</p>
-    </div>
-  )
-}
+import { SettingsPage }              from './pages/SettingsPage'
 
 export default function App() {
   return (
@@ -50,7 +43,7 @@ export default function App() {
           <Route path="/goals"        element={<CareerGoalsPage />} />
           <Route path="/skills"       element={<SkillGapPage />} />
           <Route path="/copilot"      element={<CopilotPage />} />
-          <Route path="/settings"     element={<PlaceholderPage title="Settings" />} />
+          <Route path="/settings"     element={<SettingsPage />} />
           {/* Phase 5 */}
           <Route path="/career"               element={<CareerRecommendationPage />} />
           <Route path="/career/:careerId"     element={<CareerDetailPage />} />

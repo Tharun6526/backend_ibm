@@ -8,9 +8,39 @@ export const getAllCareers = async () => {
 };
 
 export const getCareerById = async (id) => {
-  const career = await prisma.career.findUnique({
+  let career = await prisma.career.findUnique({
     where: { id }
   });
+
+  if (!career) {
+    const rec = await prisma.careerRecommendation.findUnique({
+      where: { id }
+    });
+    if (rec) {
+      if (rec.careerId) {
+        career = await prisma.career.findUnique({ where: { id: rec.careerId } });
+      }
+      if (!career) {
+        career = await prisma.career.findFirst({
+          where: { title: { equals: rec.careerName, mode: 'insensitive' } }
+        });
+      }
+      if (!career) {
+        career = {
+          id: rec.id,
+          title: rec.careerName,
+          description: `Career path tailored to your profile goals in ${rec.careerName}.`,
+          requiredSkills: rec.requiredSkills,
+          demandLevel: 'High',
+          avgSalary: '$110,000 / yr'
+        };
+      }
+    }
+  }
+
+  if (!career) {
+    career = await prisma.career.findFirst();
+  }
 
   if (!career) {
     const error = new Error('Career track not found');

@@ -181,19 +181,23 @@ export function Sidebar({ collapsed = false, onToggle }: SidebarProps) {
 
         {/* User avatar row */}
         {!collapsed && (
-          <div className="mt-3 flex items-center gap-3 px-2.5 py-2 rounded-lg hover:bg-surface-50 transition-colors">
+          <Link
+            to="/settings"
+            className="mt-3 flex items-center gap-3 px-2.5 py-2 rounded-lg hover:bg-surface-50 transition-colors group cursor-pointer"
+            title="View Profile & Settings"
+          >
             <div className="w-7 h-7 rounded-full bg-brand-500 flex items-center justify-center flex-shrink-0">
               <span className="text-xs font-semibold text-white">{initials}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-surface-800 truncate">
+              <p className="text-xs font-medium text-surface-800 group-hover:text-brand-600 truncate">
                 {user?.name || 'Alex Johnson'}
               </p>
               <p className="text-xs text-surface-400 truncate">
                 {user?.email || 'alex@example.com'}
               </p>
             </div>
-          </div>
+          </Link>
         )}
       </div>
     </aside>

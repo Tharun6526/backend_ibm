@@ -1,8 +1,9 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export interface StartInterviewPayload {
   type?: 'TECHNICAL' | 'HR' | 'BEHAVIORAL' | 'DSA' | 'JAVA' | 'FULL_STACK';
   difficulty?: 'EASY' | 'MEDIUM' | 'HARD';
+  role?: string;
 }
 
 export interface StartInterviewResponse {

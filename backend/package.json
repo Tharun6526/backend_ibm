@@ -13,7 +13,9 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand"
   },
   "dependencies": {
-    "@prisma/client": "^5.10.0",
+    "@google/generative-ai": "^0.24.1",
+    "@prisma/adapter-pg": "^7.9.1",
+    "@prisma/client": "^7.9.1",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -25,12 +27,13 @@
     "mammoth": "^1.7.0",
     "multer": "^1.4.5-lts.1",
     "pdf-parse": "^1.1.1",
+    "pg": "^8.23.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "jest": "^29.7.0",
     "nodemon": "^3.1.0",
-    "prisma": "^5.10.0",
+    "prisma": "^7.9.1",
     "supertest": "^6.3.4"
   }
 }

@@ -5,13 +5,12 @@ import {
   Bell,
   Search,
   ChevronDown,
-  Zap,
   Menu,
   HelpCircle,
   LogOut,
+  User,
 } from 'lucide-react'
 import { Badge } from '../ui/Badge'
-import { Button } from '../ui/Button'
 import { useAuth } from '../../context/AuthContext'
 
 const routeTitles: Record<string, string> = {
@@ -32,10 +31,9 @@ const routeTitles: Record<string, string> = {
 
 interface NavbarProps {
   onMenuToggle?: () => void
-  sidebarCollapsed?: boolean
 }
 
-export function Navbar({ onMenuToggle, sidebarCollapsed }: NavbarProps) {
+export function Navbar({ onMenuToggle }: NavbarProps) {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const { user, logout } = useAuth()
@@ -62,7 +60,7 @@ export function Navbar({ onMenuToggle, sidebarCollapsed }: NavbarProps) {
 
   return (
     <header className="flex items-center h-16 px-4 gap-4 bg-white border-b border-surface-200 flex-shrink-0">
-      {/* Hamburger (mobile / collapsed state toggle) */}
+      {/* Mobile Menu Toggle */}
       <button
         onClick={onMenuToggle}
         className="p-1.5 rounded-lg text-surface-500 hover:bg-surface-100 hover:text-surface-700 transition-colors lg:hidden"
@@ -70,17 +68,6 @@ export function Navbar({ onMenuToggle, sidebarCollapsed }: NavbarProps) {
       >
         <Menu size={20} />
       </button>
-
-      {/* Sidebar toggle for desktop (hidden on mobile) */}
-      {sidebarCollapsed !== undefined && (
-        <button
-          onClick={onMenuToggle}
-          className="hidden lg:flex p-1.5 rounded-lg text-surface-500 hover:bg-surface-100 hover:text-surface-700 transition-colors"
-          aria-label="Toggle sidebar"
-        >
-          <Menu size={20} />
-        </button>
-      )}
 
       {/* Page title */}
       <div className="flex items-center gap-2">
@@ -110,16 +97,6 @@ export function Navbar({ onMenuToggle, sidebarCollapsed }: NavbarProps) {
 
       {/* Spacer */}
       <div className="flex-1" />
-
-      {/* Upgrade CTA */}
-      <Button
-        variant="outline"
-        size="sm"
-        leftIcon={<Zap size={13} />}
-        className="hidden sm:inline-flex"
-      >
-        Upgrade
-      </Button>
 
       {/* Help */}
       <button
@@ -198,13 +175,27 @@ export function Navbar({ onMenuToggle, sidebarCollapsed }: NavbarProps) {
                 {user?.email || 'alex@example.com'}
               </p>
             </div>
-            <button
-              onClick={handleLogout}
-              className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-danger-600 hover:bg-danger-50 transition-colors text-left font-medium"
-            >
-              <LogOut size={15} />
-              Sign Out
-            </button>
+            <div className="py-1">
+              <button
+                onClick={() => {
+                  setUserMenuOpen(false)
+                  navigate('/settings')
+                }}
+                className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-surface-700 hover:bg-surface-50 transition-colors text-left font-medium"
+              >
+                <User size={15} className="text-surface-500" />
+                Profile & Settings
+              </button>
+            </div>
+            <div className="border-t border-surface-100 py-1">
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-danger-600 hover:bg-danger-50 transition-colors text-left font-medium"
+              >
+                <LogOut size={15} />
+                Sign Out
+              </button>
+            </div>
           </div>
         )}
       </div>

@@ -1,4 +1,5 @@
 import { clsx } from 'clsx'
+import { useNavigate } from 'react-router-dom'
 import {
   TrendingUp,
   Briefcase,
@@ -16,6 +17,7 @@ import {
   Progress,
 } from '../components/ui'
 import { mockStats, mockJobs, mockActivity, mockSkills, mockGoals } from '../data/mock'
+import { useAuth } from '../context/AuthContext'
 
 const statusColors: Record<string, 'primary' | 'success' | 'warning' | 'danger' | 'default' | 'info'> = {
   Applied:   'primary',
@@ -34,6 +36,10 @@ const activityIcons: Record<string, React.ReactNode> = {
 }
 
 export function DashboardPage() {
+  const navigate = useNavigate()
+  const { user } = useAuth()
+  const userName = user?.name ? user.name.split(' ')[0] : 'there'
+
   const topJobs = mockJobs.filter((j) => j.status !== 'Rejected').slice(0, 4)
   const topSkills = mockSkills.slice(0, 4)
   const activeGoal = mockGoals[0]
@@ -44,15 +50,22 @@ export function DashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-xl font-semibold text-surface-900">
-            Welcome back, Alex 👋
+            Welcome back, {userName} 👋
           </h2>
           <p className="text-sm text-surface-500 mt-0.5">
             Here's what's happening with your career today.
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Badge variant="success" dot size="lg">Profile 87% complete</Badge>
-          <Button variant="primary" size="sm" leftIcon={<Flame size={14} />}>
+          <button onClick={() => navigate('/settings')} className="cursor-pointer">
+            <Badge variant="success" dot size="lg">Profile 87% complete</Badge>
+          </button>
+          <Button
+            variant="primary"
+            size="sm"
+            leftIcon={<Flame size={14} />}
+            onClick={() => navigate('/settings')}
+          >
             Complete Profile
           </Button>
         </div>

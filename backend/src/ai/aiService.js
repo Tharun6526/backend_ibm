@@ -3,8 +3,12 @@ import { recommendCareerAI } from './careerAI.js';
 import { analyzeSkillGapAI } from './skillGapAI.js';
 import { generateRoadmapAI } from './roadmapAI.js';
 import { generateInterviewQuestionAI, evaluateInterviewAnswerAI } from './interviewAI.js';
+import { chatCopilotAI } from './copilotAI.js';
 
 export const aiService = {
+  chatCopilot: async (payload) => {
+    return await chatCopilotAI(payload);
+  },
   analyzeResume: async (resumeText) => {
     return await analyzeResumeAI(resumeText);
   },
