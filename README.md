@@ -1,317 +1,357 @@
-# 🚀 AI Career Copilot
+🚀 Career Copilot
+Your AI-Powered Career Development Companion
 
-> **Your AI-powered companion for building a stronger career, identifying skill gaps, and becoming job-ready.**
+Analyze your skills. Discover the right career path. Track your progress. Get job-ready.
 
-AI Career Copilot is an intelligent career development platform designed to help students and aspiring professionals understand where they are, discover where they can go, and get a personalized roadmap to reach their career goals.
+Career Copilot is a collaborative, AI-powered career development platform designed to help students and aspiring professionals make informed career decisions. It brings together career matching, skill-gap analysis, job readiness tracking, resume building, mock interviews, job tracking, and career goals into one unified experience.
 
-From **resume analysis** and **GitHub evaluation** to **career recommendations**, **skill-gap analysis**, and **AI-powered mock interviews**, the platform brings the complete career-development journey into one place.
+✨ Overview
 
----
+Building a successful career requires more than just learning technical skills. Students often struggle to understand:
 
-## ✨ Why AI Career Copilot?
+🎯 Which career path best matches their profile?
+📊 Which skills need improvement?
+📄 How strong is their resume?
+💼 Which jobs should they apply for?
+🎤 Are they prepared for interviews?
+🗺️ What should they learn next?
 
-Preparing for a career often means using multiple platforms for resumes, courses, coding profiles, interview preparation, and job tracking.
+Career Copilot helps answer these questions through a centralized and personalized career-development platform.
 
-**AI Career Copilot brings these pieces together.**
+👤 Profile & Skills
+        ↓
+🤖 AI Career Analysis
+        ↓
+🎯 Career Matches
+        ↓
+📊 Skill Gap Analysis
+        ↓
+🗺️ Personalized Roadmap
+        ↓
+📄 Resume & Job Readiness
+        ↓
+💼 Job Tracking & Interview Practice
+🌟 Features
+📊 Personalized Dashboard
 
-```text
-👤 Your Profile
-      ↓
-📄 Resume Analysis + 🐙 GitHub Analysis
-      ↓
-🤖 AI Career Recommendations
-      ↓
-🎯 Skill Gap Identification
-      ↓
-🗺️ Personalized Learning Roadmap
-      ↓
-📚 Recommended Courses & Practice
-      ↓
-📊 Job Readiness Score
-      ↓
-🎤 AI Mock Interviews
-```
+Get a quick overview of your career journey in one place.
 
----
+The dashboard provides insights into:
 
-# 🌟 Key Features
+Applications sent
+Interviews scheduled
+Offers received
+Profile completion
+Active job applications
+Current career goals
+Recent activity
 
-## 🔐 Secure Authentication
+🎯 AI Career Matches
 
-* JWT-based authentication
-* Secure password hashing using bcrypt
-* Protected API routes
-* User account management
+Discover career paths that align with your skills, experience, projects, and interests.
 
-## 👤 Career Profile Management
+The Career Matches module provides:
 
-Build a comprehensive professional profile including:
+Your strongest career match
+Match percentage
+Reasons why a career matches your profile
+Alternative career paths to explore
 
-* Career goals
-* Academic information
-* Skills and interests
-* Learning preferences
+For example, the platform can identify Software Developer as a strong career match based on the user's technical skills and project experience.
 
-## 📄 Resume Analysis
+📈 Skill Gap Analysis
 
-Upload your resume and receive meaningful insights.
+Understand how your current skills compare with the requirements of your target career.
 
-* PDF and DOCX resume support
-* Resume text extraction
-* Section parsing
-* AI-powered resume analysis
-* Skill identification and evaluation
+Features include:
 
-## 🐙 GitHub Profile Analysis
+Current skill alignment percentage
+Target skill requirements
+Individual skill category analysis
+Strong skills and areas needing improvement
+Identification of the biggest learning opportunity
 
-Connect your GitHub profile to showcase your practical development experience.
+🛡️ Job Readiness Assessment
 
-* Repository analysis
-* Programming language statistics
-* Project evaluation
-* Developer profile insights
+Measure how prepared you are for your target role.
 
-## 🧭 Career Recommendations
+The Job Readiness module evaluates different aspects of career preparation, including:
 
-Discover career paths that align with your profile.
+💻 Technical Skills
+🧩 DSA & Algorithms
+🚀 Project Portfolio
+📄 Resume Quality
+🐙 GitHub Activity
+🎤 Interview Readiness
 
-The recommendation engine considers:
+Users receive an overall readiness score along with strengths and recommendations for improvement.
 
-* Skills
-* Projects
-* Resume information
-* Experience
-* Career interests
+🎤 Mock Interview
 
-## 🎯 Skill Gap Analysis
+Practice technical interviews in an interactive environment.
 
-Understand what skills you need to reach your target role.
+The Mock Interview feature helps users:
 
-The platform helps identify:
+Answer role-specific technical questions
+Practice structured responses
+Track interview progress
+Receive AI-assisted feedback and guidance
 
-* Existing strengths
-* Missing skills
-* Skill-gap metrics
-* Recommended next actions
+💼 Job Tracker & Live Postings
 
-## 🗺️ Personalized Career Roadmap
+Keep your job search organized while exploring relevant opportunities.
 
-Get a structured, step-by-step roadmap based on your goals.
+Features include:
 
-Track your progress with task statuses:
+🔎 Search job opportunities
+📌 Save interesting jobs
+📤 Track applications
+🎤 Monitor interview stages
+🎉 Track offers and outcomes
+📊 View skill-match percentages
+🔄 Refresh available job postings
 
-* `NOT_STARTED`
-* `IN_PROGRESS`
-* `COMPLETED`
+📄 Smart Resume Builder
 
-## 📚 Skills & Course Recommendations
+Build and improve your professional resume with structured guidance.
 
-Receive curated learning recommendations connected directly to your skill gaps and career roadmap.
+The Resume Builder provides:
 
-## 📊 Job Readiness Score
+Profile-based resume sections
+Skills synchronization
+Resume completion tracking
+ATS score insights
+AI-powered improvement suggestions
+Resume preview and export options
 
-Track your overall career readiness through a dynamic scoring system based on areas such as:
+🎯 Career Goals
 
-| Category            | Evaluation                            |
-| ------------------- | ------------------------------------- |
-| 💻 Technical Skills | Skills relevant to your target role   |
-| 🧩 DSA              | Problem-solving preparation           |
-| 🚀 Projects         | Practical development experience      |
-| 📄 Resume           | Resume quality and completeness       |
-| 🐙 GitHub           | Developer portfolio and activity      |
-| 🎤 Interviews       | Interview preparation and performance |
+Set meaningful career goals and track progress toward achieving them.
 
-## 🎤 AI-Powered Mock Interviews
+Users can:
 
-Practice for real interviews with interactive mock interview sessions.
+Create career goals
+Set target dates
+Add milestones
+Track completion progress
+Update goal status
+Mark milestones as completed
 
-* Technical and HR interview practice
-* Answer submission
-* Automated evaluation
-* Performance feedback
+🗺️ Personalized Career Journey
 
----
+Career Copilot brings different stages of career preparation together into a structured journey:
 
-# 🛠️ Tech Stack
+Profile Setup
+     ↓
+Resume & GitHub
+     ↓
+AI Analysis
+     ↓
+Career Recommendation
+     ↓
+Skill Gap Analysis
+     ↓
+Personalized Roadmap
+     ↓
+Job Readiness
+     ↓
+Interview Preparation
+🖥️ Application Screenshots
 
-### Backend
+The following screens demonstrate the current Career Copilot experience:
 
-* **Node.js**
-* **Express.js**
-* **PostgreSQL**
-* **Prisma ORM**
-* **JWT Authentication**
-* **bcrypt**
+Feature	Description
+📊 Dashboard	Career overview and application activity
+🎯 Career Matches	AI-powered career recommendations
+📈 Skill Gap	Current skills vs. target requirements
+🛡️ Job Readiness	Overall career readiness analysis
+🎤 Mock Interview	Interactive interview preparation
+💼 Job Tracker	Job opportunities and application tracking
+📄 Resume Builder	Resume analysis and improvement
+🎯 Career Goals	Goal and milestone tracking
 
-### Frontend
+📌 Tip: Create a screenshots folder in your repository and place the images there using the filenames referenced above.
 
-* **React**
-* **TypeScript**
-* **Vite**
-* **Tailwind CSS**
+Example:
 
----
+screenshots/
+├── dashboard.png
+├── career-matches.png
+├── skill-gap.png
+├── job-readiness.png
+├── mock-interview.png
+├── job-tracker.png
+├── resume-builder.png
+└── career-goals.png
+🏗️ Project Architecture
 
-# 🏗️ Project Structure
+Career Copilot follows a client-server architecture:
 
-```text
-backend_ibm/
+                    ┌─────────────────────┐
+                    │      Frontend       │
+                    │   User Interface    │
+                    └──────────┬──────────┘
+                               │
+                          API Requests
+                               │
+                    ┌──────────▼──────────┐
+                    │       Backend       │
+                    │ Business Logic/API  │
+                    └──────────┬──────────┘
+                               │
+              ┌────────────────┼────────────────┐
+              │                │                │
+              ▼                ▼                ▼
+        Authentication     AI Analysis       Job Data
+              │                │                │
+              └────────────────┼────────────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │      Database       │
+                    └─────────────────────┘
+🛠️ Technology Stack
+
+The project is built using modern web technologies. Update this section to match the final technologies used by your team.
+
+Frontend
+⚛️ React
+⚡ Modern JavaScript/TypeScript tooling
+🎨 Responsive UI components and styling
+Backend
+🟢 Node.js
+🚂 Express.js
+🔗 RESTful APIs
+Database & ORM
+🗄️ PostgreSQL
+🔺 Prisma ORM
+Authentication & Security
+🔐 JWT Authentication
+🔑 Secure password handling
+AI & Career Intelligence
+🤖 AI-assisted career analysis
+📊 Skill and career matching
+💡 Personalized recommendations
+📁 Project Structure
+career-copilot/
 │
-├── backend/
-│   ├── prisma/          # Database schema and migrations
-│   ├── src/             # Backend application source code
-│   ├── tests/           # Backend tests
-│   ├── uploads/         # Uploaded files
-│   ├── .env.example     # Environment variable template
+├── frontend/                 # Frontend application
+│   ├── src/
+│   └── public/
+│
+├── backend/                  # Backend application
+│   ├── src/
+│   │   ├── controllers/      # API request handlers
+│   │   ├── routes/           # Application routes
+│   │   ├── services/         # Business logic
+│   │   ├── middleware/       # Authentication & middleware
+│   │   └── utils/            # Helper functions
+│   │
+│   ├── prisma/               # Database schema & migrations
 │   └── package.json
 │
-├── src/                 # Frontend source code
-├── public/              # Static assets
-├── package.json         # Frontend dependencies
-└── vite.config.ts       # Vite configuration
-```
-
----
-
-# 🚀 Getting Started
-
-## Prerequisites
+├── screenshots/              # Application screenshots
+│
+└── README.md
+🚀 Getting Started
+Prerequisites
 
 Make sure you have the following installed:
 
-* Node.js
-* npm
-* PostgreSQL
-
----
-
-## 1️⃣ Clone the Repository
-
-```bash
+Node.js
+npm
+PostgreSQL
+Git
+Clone the Repository
 git clone https://github.com/Tharun6526/backend_ibm.git
 cd backend_ibm
-```
+Install Dependencies
 
----
+Navigate to the respective frontend or backend directory and install dependencies:
 
-## 2️⃣ Set Up the Backend
-
-Navigate to the backend directory:
-
-```bash
-cd backend
-```
-
-Install dependencies:
-
-```bash
 npm install
-```
+Environment Configuration
 
----
+Create a .env file for environment-specific configuration.
 
-## 3️⃣ Configure Environment Variables
+Example:
 
-Create a `.env` file based on `.env.example`.
+DATABASE_URL="your_database_connection_string"
+JWT_SECRET="your_secret_key"
+PORT=5000
 
-Example database configuration:
+⚠️ Never commit .env files, API keys, passwords, or other sensitive credentials to GitHub.
 
-```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/career_copilot?schema=public"
-```
+Database Setup
 
-> ⚠️ Never commit your actual `.env` file or sensitive credentials to GitHub.
+If using Prisma:
 
----
-
-## 4️⃣ Set Up the Database
-
-Create the PostgreSQL database:
-
-```sql
-CREATE DATABASE career_copilot;
-```
-
-Run Prisma migrations and generate the Prisma Client:
-
-```bash
-npx prisma migrate dev --name init
+npx prisma migrate dev
 npx prisma generate
-```
+Run the Application
 
-Seed the database if required:
+Start the development server using the scripts configured in the project:
 
-```bash
-node prisma/seed.js
-```
-
----
-
-## 5️⃣ Run the Backend
-
-```bash
 npm run dev
-```
+🤝 Team Collaboration
 
-The backend server should now be running locally. 🎉
+Career Copilot is developed as a team project, with team members collaborating across frontend development, backend development, database design, AI integration, and testing.
 
----
+We use Git and GitHub to maintain an organized development workflow.
 
-# 🧪 Testing
+Create Feature Branch
+        ↓
+Develop Feature
+        ↓
+Test Changes
+        ↓
+Commit Changes
+        ↓
+Push to GitHub
+        ↓
+Create Pull Request
+        ↓
+Review & Merge
+Suggested Branch Naming
+feature/job-tracker
+feature/resume-builder
+feature/skill-gap-analysis
+feature/mock-interview
+fix/authentication
+👥 Team
 
-Run the test suite with:
+This project is proudly built through collaboration and teamwork.
 
-```bash
-npm test
-```
+Team Member	Role / Contribution
+A.Tharun Chowdary	 Backend
+K.Gowtham Karthik  Frontend 
+M.Srilaya	       UI/UX Design
+V.Sahitya        	 Testing /Documentation
 
----
 
-# 🔮 Future Improvements
+🔮 Future Improvements
 
-The project is continuously evolving. Potential future enhancements include:
+Some areas we plan to explore as the project evolves include:
 
-* 🤖 Advanced AI career recommendations
-* 📈 More detailed analytics and insights
-* 🔍 Job matching and job recommendations
-* 🔔 Career and learning reminders
-* 🌐 Deployment and cloud integration
-* 📱 Improved mobile responsiveness
-* 🏆 Gamified learning progress
+More advanced AI career recommendations
+Enhanced job matching
+Improved learning roadmaps
+Advanced analytics and insights
+Additional interview scenarios
+Cloud deployment
+Personalized notifications and reminders
+🎯 Our Vision
 
----
+Career preparation should be personalized, measurable, and accessible.
 
-# 🎯 Vision
+Career Copilot aims to provide students and aspiring professionals with a structured way to understand where they are today, what they need to improve, and what steps they can take toward their career goals.
 
-> **AI Career Copilot aims to transform career preparation from a generic checklist into a personalized, data-driven journey.**
+⭐ Support
 
-Whether you're preparing for your first internship, improving your development skills, or working toward your dream role, AI Career Copilot helps you understand your current position and take meaningful steps toward your next opportunity.
+If you find this project interesting, consider giving the repository a star ⭐. It motivates our team to continue building and improving Career Copilot!
 
----
+<div align="center">
+🚀 Discover Your Path. Build Your Skills. Prepare for Your Career.
 
-# 🤝 Contributing
+Built with collaboration, innovation, and continuous learning.
 
-Contributions, suggestions, and feedback are welcome!
-
-If you'd like to contribute:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
----
-
-# 👨‍💻 Author
-
-**Tharun Chowdary**
-
-Aspiring Software Developer | Building projects and learning every day 🚀
-
----
-
-## ⭐ Support
-
-If you find this project useful or interesting, consider giving it a **star ⭐** on GitHub!
-
-**Happy Building! 🚀**
+</div>
